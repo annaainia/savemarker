@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Latihan Google  map</title>
+  <style type='text/css'>
+  #peta {
+  width: 100%;
+  height: 400px;
+
+} </style>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+   <script type="text/javascript">
+    
+    (function() {
+  window.onload = function() {
+var map;
+    //Parameter Google maps
+    var options = {
+      zoom: 12, //level zoom
+      //posisi tengah peta
+      center: new google.maps.LatLng(-5.367284, 105.244935),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    
+     // Buat peta di 
+    var map = new google.maps.Map(document.getElementById('peta'), options);
+     // Tambahkan Marker 
+     var locations = [
+        ['Punduh Pidada', -5.751495, 105.149245],
+        ['Marga Punduh',-5.659498,105.156952],
+        ['Padang Cermin', -5.535958, 105.227883],
+        ['Way Ratai', -5.600866, 105.073301],
+		['Teluk Pandan',-5.527842, 105.238011],
+		['Kedondong',-5.491850, 104.965455],
+		['Way Khilau',-5.490825,104.944512],
+		['Way Lima',-5.417839,105.015153],
+		['Gedong Tataan',-5.384999,105.083161],
+		['Tegineneng',-5.159458,105.122460],
+		['Negeri Katon',-5.284466,105.054165]
+    
+    ];
+      var infowindow = new google.maps.InfoWindow();
+
+    var marker, i;
+     /* kode untuk menampilkan banyak marker */
+    for (i = 0; i < locations.length; i++) {  
+      marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map,
+         icon: 'images/pin.png'
+      });
+     /* menambahkan event clik untuk menampikan
+          infowindows dengan isi sesuai denga
+        marker yang di klik */
+        
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+    }
+  
+
+  };
+})();
+
+    </script>
+  </head>
+  <body>
+    
+    <div id="peta"></div>
+
+  </body>
+</html>
+

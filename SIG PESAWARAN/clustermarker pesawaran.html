@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>Latihan Google Map API</title>
+        <style>
+            #map {
+                background-color: gray;
+                width: 100%;
+                height: 400px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="map"></div>
+    </body>
+    <script>
+        function initMap(){
+            var center = {lat: -5.387218, lng: 105.261122};
+            var map=new google.maps.Map(document.getElementById('map'),{zoom:9,center:center});
+            // console.log(map);
+            var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        
+            var markers = locations.map(function(location, i) {
+                return new google.maps.Marker({
+                    position: location,
+                    label: labels[i % labels.length]
+                });
+                }); 
+            console.log(locations);
+            console.log(markers);
+            var markerCluster = new MarkerClusterer(map, markers,
+                {imagePath: 'images/m'});
+        
+            var d = markerCluster.distanceBetweenPoints_(markers[2].getPosition(),markers[4].getPosition());
+            console.log(markerCluster.getCalculator());
+            // var marker=new google.maps.Marker({position:center,map:map});
+            // console.log(marker);
+        }
+
+        var locations = [
+        {lat: -5.751495, lng: 105.149245, info: "Punduh Pidada"},
+        {lat: -5.659498, lng: 105.156952, info: "Marga Punduh"},
+        {lat: -5.535958, lng: 105.227883, info: "Padang Cermin"},
+        {lat: -5.600866, lng: 105.073301, info: "Way Ratai"},
+        {lat: -5.534548, lng: 105.230372, info: "Teluk Pandan"},
+        {lat: -5.491850, lng: 104.965455, info: "Kedondong"},
+        {lat: -5.490825, lng: 104.944512, info: "Way Khilau"},
+        {lat: -5.417839, lng: 105.015153, info: "Way Lima"},
+        {lat: -5.384999, lng: 105.083161, info: "Gedong Tataan"},
+        {lat: -5.159458, lng: 105.122460, info: "Tegineneng"},
+        {lat: -5.284466, lng: 105.054165, info: "Negeri Katon"},
+      ]
+    </script>
+    <script async defer 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqIy-vX5tDUpnN5EUuIVG5fNeEuHWm3q4&callback=initMap"></script>
+    <script src="src/markerclusterer.js">
+    </script>
+</html>
